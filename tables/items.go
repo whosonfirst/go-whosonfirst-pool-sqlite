@@ -70,20 +70,4 @@ func (t *ItemsTable) IndexRecord(db sqlite.Database, i interface{}) error {
 func (t *ItemsTable) indexItem(db sqlite.Database, i pool.Item) error {
 
 	return errors.New("Please write me")
-
-	conn, err := db.Conn()
-
-	if err != nil {
-		return err
-	}
-
-	tx, err := conn.Begin()
-
-	if err != nil {
-		return err
-	}
-
-	// do stuff here...
-
-	return tx.Commit()
 }
