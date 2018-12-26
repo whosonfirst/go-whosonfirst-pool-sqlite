@@ -135,8 +135,7 @@ func (t *IntItemsTable) Pop(db sqlite.Database) (pool.Item, bool) {
 	}
 
 	pi := pool.NewIntItem(int)
-
-	return pi, false
+	return pi, true
 }
 
 func (t *IntItemsTable) Length(db sqlite.Database) int64 {
