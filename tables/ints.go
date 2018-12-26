@@ -17,12 +17,11 @@ CREATE INDEX %s_by_date ON %s (created);
 `
 
 type IntItemsTable struct {
-	sqlite.Table
-	SQLiteLIFOPoolTable
+	ItemsTable
 	name string
 }
 
-func NewIntItemsTableWithDatabase(db sqlite.Database) (sqlite.Table, error) {
+func NewIntItemsTableWithDatabase(db sqlite.Database) (ItemsTable, error) {
 
 	t, err := NewIntItemsTable()
 
@@ -39,7 +38,7 @@ func NewIntItemsTableWithDatabase(db sqlite.Database) (sqlite.Table, error) {
 	return t, nil
 }
 
-func NewIntItemsTable() (sqlite.Table, error) {
+func NewIntItemsTable() (ItemsTable, error) {
 
 	t := IntItemsTable{
 		name: "ints",
@@ -53,13 +52,10 @@ func (t *IntItemsTable) Name() string {
 }
 
 func (t *IntItemsTable) Schema() string {
-
-	// this is a bit stupid really... (20170901/thisisaaronland)
 	return fmt.Sprintf(schema, t.Name(), t.Name(), t.Name())
 }
 
 func (t *IntItemsTable) InitializeTable(db sqlite.Database) error {
-
 	return utils.CreateTableIfNecessary(db, t)
 }
 

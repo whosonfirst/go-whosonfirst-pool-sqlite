@@ -10,7 +10,7 @@ import (
 type SQLiteLIFOPool struct {
 	pool.LIFOPool
 	db    sqlite.Database
-	items sqlite.Table
+	items tables.ItemsTable
 }
 
 func NewSQLiteLIFOPool(dsn string) (pool.LIFOPool, error) {
@@ -36,16 +36,13 @@ func NewSQLiteLIFOPool(dsn string) (pool.LIFOPool, error) {
 }
 
 func (pl *SQLiteLIFOPool) Length() int64 {
-
-	return pl.items.Length(pl.database)
+	return pl.items.Length(pl.db)
 }
 
 func (pl *SQLiteLIFOPool) Push(pi pool.Item) {
-
-	pl.items.Push(pl.database, pi)
+	pl.items.Push(pl.db, pi)
 }
 
 func (pl *SQLiteLIFOPool) Pop() (pool.Item, bool) {
-
-	return pl.items.Pop(pl.database)
+	return pl.items.Pop(pl.db)
 }
