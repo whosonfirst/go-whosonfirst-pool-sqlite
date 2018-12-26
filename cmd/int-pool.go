@@ -19,9 +19,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	f := pool.NewIntItem(int64(123))
+	f1 := pool.NewIntItem(int64(123))
+	f2 := pool.NewIntItem(int64(456))
 
-	p.Push(f)
+	p.Push(f1)
+	p.Push(f2)
+
 	v, _ := p.Pop()
 
 	fmt.Printf("%d", v.Int())
